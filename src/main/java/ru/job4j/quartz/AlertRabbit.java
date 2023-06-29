@@ -61,8 +61,8 @@ public class AlertRabbit {
         @Override
         public void execute(JobExecutionContext context) {
             System.out.println("Rabbit runs here ...");
-            Connection Connection = (Connection) context.getJobDetail().getJobDataMap().get("connection");
-            try (PreparedStatement ps = Connection.prepareStatement("INSERT INTO rabbit(created_date) VALUES(?)")) {
+            Connection connection = (Connection) context.getJobDetail().getJobDataMap().get("connection");
+            try (PreparedStatement ps = connection.prepareStatement("INSERT INTO rabbit(created_date) VALUES(?)")) {
                 ps.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
                 ps.execute();
             } catch (Exception e) {
