@@ -17,7 +17,7 @@ public class HabrCareerParse {
 
     public static void main(String[] args) throws IOException {
         for (int i = 1; i <= PAGE_NUMBER; i++) {
-            Connection connection = Jsoup.connect(PAGE_LINK + i);
+            Connection connection = Jsoup.connect(String.format("%s%s", PAGE_LINK, i));
             Document document = connection.get();
             Elements rows = document.select(".vacancy-card__inner");
             rows.forEach(row -> {
@@ -30,6 +30,5 @@ public class HabrCareerParse {
                 System.out.printf("%s %s %s%n", vacancyName, link, date);
             });
         }
-
     }
 }
